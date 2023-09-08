@@ -19,16 +19,14 @@ Like for any other Pysyun Pipeline sources, the **process** method should return
 In this particular case, the timeline of a single element - the current date and reserves value as a JSON document.
 
 ## Non-functional requirements
-The project source code can be forked from this repository.
+- The project source code can be forked from this repository.
 
-The library should be installable using PIP. 
+- The library should be installable using PIP. 
 
-The library name: "**pysyun_uniswap_source**".
+- The library name: "**pysyun_uniswap_source**".
 
-The main class name: "**UniswapV2Source**".
+- The main class name: "**UniswapV2Source**".
 
-Example source implementation (for reference):
+- Example Pysyun Timeline source implementation (for reference): https://github.com/pysyun/pysyun-timeline/blob/master/pysyun/timeline/filters.py#L20
 
-https://github.com/pysyun/pysyun-timeline/blob/master/pysyun/timeline/filters.py#L20
-
-The library should be tested from a Google Colab, illustrating that the functional requirements are met.
+- The library should be tested from a Google Colab, illustrating that the functional requirements are met.

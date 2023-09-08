@@ -9,6 +9,8 @@
 
 **Copyright**: https://hype.dev, 2023. All rights reserved.
 
+**Download URI**: [pysyun_uniswap_source.pdf](./pysyun_uniswap_source.pdf)
+
 ## Functional requirements
 The source class should accept the Uniswap pair address and blockchain connection settings in the constructor.
 

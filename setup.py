@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='pysyun_uniswap_source',
-    version='0.0.1.',
+    version='1.0',
     author='Immortal Tapok',
     author_email='immortaltapok@lineardev.net',
     py_modules=['pysyun_uniswap_source.uniswap_source', 'pysyun_uniswap_source.abi.uniswap_abi'],

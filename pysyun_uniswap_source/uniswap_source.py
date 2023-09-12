@@ -33,12 +33,3 @@ class UniswapV2Source:
 
         # Повернення списку "timeline" у форматі JSON
         return json.dumps(self.timeline)
-
-# Задайте необхідні значення
-uniswap_address = "0x047a813A2Ad7AD933a75EA4e9475495f2E03c577"
-blockchain_settings = "https://bsc-dataseed1.binance.org:443"  # Замініть на правильну URL-адресу вузла Ethereum
-
-# Створіть об'єкт UniswapV2Source та виконайте метод process()
-uniswap_source = UniswapV2Source(uniswap_address, blockchain_settings)
-result_json = uniswap_source.process()
-print(result_json)

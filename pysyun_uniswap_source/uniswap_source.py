@@ -1,7 +1,7 @@
 import time
 import json
 from web3 import Web3
-from abi.uniswap_abi import UniswapPairABI
+from pysyun_uniswap_source.abi.uniswap_abi import UniswapPairABI
 
 class UniswapV2Source:
     def __init__(self, uniswap_address, blockchain_settings):

@@ -4,10 +4,10 @@ from web3 import Web3
 from pysyun_uniswap_source.abi.uniswap_abi import UniswapPairABI
 
 class UniswapV2Source:
-    def __init__(self, uniswap_address, blockchain_settings):
+    def __init__(self, provider_settings, uniswap_address):
         self.uniswap_address = uniswap_address
-        self.blockchain_settings = blockchain_settings
-        self.web3 = Web3(Web3.HTTPProvider(blockchain_settings))
+        self.provider_settings = provider_settings
+        self.web3 = Web3(Web3.HTTPProvider(provider_settings))
         self.pair_abi = UniswapPairABI.get()
         self.timeline = []
 

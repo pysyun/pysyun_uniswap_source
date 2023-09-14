@@ -2,6 +2,7 @@ import time
 import json
 from web3 import Web3
 from pysyun_uniswap_source.abi.uniswap_abi import UniswapPairABI
+from pysyun_uniswap_source.abi.uniswap_factory_abi import UniswapFactoryAbi
 
 class UniswapV2Source:
     def __init__(self, provider_settings, uniswap_address):
@@ -33,3 +34,24 @@ class UniswapV2Source:
 
         # Повернення списку "timeline" у форматі JSON
         return json.dumps(self.timeline)
+
+class UniswapV2PairsSource:
+
+    def __init__(self, provider_settings, pairs_number=1000):
+        self.max_pairs_num = 252434
+        self.pairs_number = pairs_number
+        self.provider_settings = provider_settings
+        self.web3 = Web3(Web3.HTTPProvider(provider_settings))
+        self.pair_abi = UniswapFactoryAbi.get()
+
+    def process(self):
+        contract = self.web3.eth.contract(address="0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f", abi=UniswapFactoryAbi.get())
+        result = []
+
+        for i in range(self.max_pairs_num, self.max_pairs_num - self.pairs_number, -1):
+            address = contract.functions.allPairs(i).call()
+            result.append(address)
+
+        return result
+
+

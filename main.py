@@ -12,7 +12,7 @@ load_dotenv()
 database_url = os.environ.get('STORAGE_TIMELINE_URI')
 ethereum_rpc_uri = os.environ.get('ETHEREUM_RPC_URI')
 uniswap_factory_contract_address = os.environ.get('UNISWAP_FACTORY_CONTRACT_ADDRESS')
-last_pairs_count = os.environ.get('LAST_PAIRS_COUNT', 17)
+last_pairs_count = int(os.environ.get('LAST_PAIRS_COUNT', 17))
 
 progress_bar = tqdm(total=last_pairs_count, ncols=80)
 

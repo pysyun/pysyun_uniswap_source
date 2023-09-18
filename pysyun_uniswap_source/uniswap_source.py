@@ -1,5 +1,4 @@
 import time
-import json
 
 from web3 import Web3
 from eth_utils import to_checksum_address
@@ -7,13 +6,13 @@ from pysyun_uniswap_source.abi.uniswap_abi import UniswapPairABI
 from pysyun_uniswap_source.abi.uniswap_factory_abi import UniswapFactoryAbi
 
 
-class UniswapV2Source:
+class UniswapV2ReservesSource:
 
     def __init__(self, provider_settings, uniswap_pair_address):
         self.provider_settings = provider_settings
         self.uniswap_pair_address = uniswap_pair_address
 
-    def process(self):
+    def process(self, _):
         __web3 = Web3(Web3.HTTPProvider(self.provider_settings))
         uniswap_pair = __web3.eth.contract(address=self.uniswap_pair_address, abi=UniswapPairABI.get())
 
@@ -24,10 +23,12 @@ class UniswapV2Source:
 
         result = {
             "timestamp": current_time,
-            "value": [reserve0, reserve1]
+            "value": {
+                "r": [reserve0, reserve1]
+            }
         }
 
-        return json.dumps([result])
+        return [result]
 
 
 class UniswapV2PairsSource:

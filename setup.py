@@ -6,5 +6,5 @@ setup(
     author='Immortal Tapok',
     author_email='immortaltapok@lineardev.net',
     py_modules=['pysyun_uniswap_source.uniswap_source', 'pysyun_uniswap_source.abi.uniswap_abi'],
-    install_requires=['web3', 'requests', 'python-dotenv']
+    install_requires=['web3', 'requests', 'python-dotenv', 'tqdm']
 )

@@ -3,6 +3,7 @@ import os
 import time
 import json
 from dotenv import load_dotenv
+from tqdm import tqdm
 
 from pysyun_uniswap_source.uniswap_source import UniswapV2PairsSource, UniswapV2ReservesSource
 
@@ -12,6 +13,8 @@ database_url = os.environ.get('STORAGE_TIMELINE_URI')
 ethereum_rpc_uri = os.environ.get('ETHEREUM_RPC_URI')
 uniswap_factory_contract_address = os.environ.get('UNISWAP_FACTORY_CONTRACT_ADDRESS')
 last_pairs_count = os.environ.get('LAST_PAIRS_COUNT', 17)
+
+progress_bar = tqdm(total=last_pairs_count, ncols=80)
 
 pairs = UniswapV2PairsSource(
     ethereum_rpc_uri,
@@ -45,3 +48,7 @@ for pair in pairs:
     })
     if database_response.text != '1':
         print(f"Storage.Timeline error: {database_response.text}")
+
+    progress_bar.update(1)
+
+progress_bar.close()

@@ -23,9 +23,14 @@ pairs = UniswapV2PairsSource(
 
 schema_name = f"{uniswap_factory_contract_address}.last-{last_pairs_count}-pair"
 
-requests.post(database_url, json={
-    "schema": schema_name
-})
+
+def create_schema():
+    requests.post(database_url, json={
+        "schema": schema_name
+    })
+
+
+create_schema()
 
 for pair in pairs:
 
@@ -49,6 +54,11 @@ for pair in pairs:
     if database_response.text != '1':
         print(f"Storage.Timeline error: {database_response.text}")
 
+        # Most likely, the schema does not exist
+        create_schema()
+
     progress_bar.update(1)
+
+    time.sleep(0.5)
 
 progress_bar.close()

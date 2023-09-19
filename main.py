@@ -1,7 +1,6 @@
 import requests
 import os
 import time
-import json
 from dotenv import load_dotenv
 from tqdm import tqdm
 
@@ -43,10 +42,7 @@ for pair in pairs:
     })
 
     # Try to save the data item
-    database_response = requests.put(database_url, json={
-        "time": int(time.time()) * 1000,  # To milliseconds
-        "value": json.dumps(reserves)
-    }, params={
+    database_response = requests.put(database_url, json=reserves[0], params={
         'format': 'string',
         "schema": schema_name,
         "timeLine": pair

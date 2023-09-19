@@ -1,3 +1,4 @@
+import json
 import time
 
 from web3 import Web3
@@ -19,13 +20,11 @@ class UniswapV2ReservesSource:
         reserve0 = uniswap_pair.functions.getReserves().call()[0]
         reserve1 = uniswap_pair.functions.getReserves().call()[1]
 
-        current_time = time.time()
-
         result = {
-            "timestamp": current_time,
-            "value": {
+            "time": int(time.time()) * 1000,  # To milliseconds
+            "value": json.dumps({
                 "r": [reserve0, reserve1]
-            }
+            })
         }
 
         return [result]

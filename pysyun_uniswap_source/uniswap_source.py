@@ -66,7 +66,6 @@ class UniswapPairMetadata:
 
         result = []
 
-        # List requested pairs
         for pair_contract_address in addresses:
             pair_contract = web3.eth.contract(address=pair_contract_address, abi=pair_abi)
             token0_address = pair_contract.functions.token0().call()
@@ -80,3 +79,30 @@ class UniswapPairMetadata:
             })
 
         return result
+
+
+class UniswapV2SemanticKernel:
+
+    def __init__(self, node_uri):
+        self.node_uri = node_uri
+
+    def process(self, pair_contract_addresses):
+        web3 = Web3(Web3.HTTPProvider(self.node_uri))
+        pair_abi = UniswapPairABI.get()
+
+        token_names = set()
+
+        # Iterate over pair contract addresses
+        for pair_contract_address in pair_contract_addresses:
+            pair_contract = web3.eth.contract(address=pair_contract_address, abi=pair_abi)
+            token0_address = pair_contract.functions.token0().call()
+            token1_address = pair_contract.functions.token1().call()
+
+            # Get the names of the tokens
+            token0_name = web3.eth.contract(address=token0_address, abi=pair_abi).functions.name().call()
+            token1_name = web3.eth.contract(address=token1_address, abi=pair_abi).functions.name().call()
+
+            token_names.add(token0_name)
+            token_names.add(token1_name)
+
+        return token_names

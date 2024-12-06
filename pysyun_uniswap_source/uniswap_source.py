@@ -9,13 +9,12 @@ from pysyun_uniswap_source.abi.uniswap_factory_abi import UniswapFactoryAbi
 
 class UniswapV2ReservesSource:
 
-    def __init__(self, provider_settings, uniswap_pair_address):
+    def __init__(self, provider_settings):
         self.provider_settings = provider_settings
-        self.uniswap_pair_address = uniswap_pair_address
 
-    def process(self, _):
+    def process(self, uniswap_pair_address):
         __web3 = Web3(Web3.HTTPProvider(self.provider_settings))
-        uniswap_pair = __web3.eth.contract(address=self.uniswap_pair_address, abi=UniswapPairABI.get())
+        uniswap_pair = __web3.eth.contract(address=uniswap_pair_address[0], abi=UniswapPairABI.get())
 
         reserve0 = uniswap_pair.functions.getReserves().call()[0]
         reserve1 = uniswap_pair.functions.getReserves().call()[1]
